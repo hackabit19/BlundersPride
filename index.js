@@ -41,34 +41,14 @@ require("./config/passport")(passport);
 app.use("/api/users", users);
 app.use("/api/missingPersons", missingPersons);
 
-// var ably = new require("ably").Realtime("0BeZCQ.p_xJxQ:kVy3m7kzD63IqtwN");
-// var channel = ably.channels.get("ablyTest");
-// app.post("/ablyTest", (req, res) => {
-//     const email = req.body.email;
-//     User.findOne({ email })
-//         .then(user => {
-//             channel.publish("greeting", user);
-//             return res.json({ msg: "success" });
-//         })
-//         .catch(err => console.log(err));
-
-//     // Publish a message to the test channel
-// });
-
-// channel.subscribe("greeting", message => {
-//     console.log(message.data);
-// });
-
 // Serve static assets.
-if (process.env.NODE_ENV === "production") {
-    // set a static folder.
-    app.use(express.static(path.resolve(__dirname, "client", "build")));
+// if (process.env.NODE_ENV === "production") {
+// set a static folder.
+app.use(express.static(path.resolve(__dirname, "client", "build")));
 
-    app.get("*", (req, res) => {
-        res.sendFile(
-            path.resolve(__dirname, "clientBuild", "build", "index.html")
-        );
-    });
-}
+app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+});
+// }
 
 app.listen(PORT, () => console.log(`Listening to port ${PORT}`));

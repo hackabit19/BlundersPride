@@ -96,7 +96,7 @@ class ReportMissing extends Component {
                     />
                     <TextFieldInput
                         name="sex"
-                        label="Sex"
+                        label="Gender"
                         margin="dense"
                         variant="outlined"
                         value={this.state.sex}
@@ -130,7 +130,10 @@ class ReportMissing extends Component {
                         onChange={this.onChangeHandler}
                         errormsg={errors.details}
                     />
-                    <DropzoneArea onChange={this.handleFileChange} />
+                    <DropzoneArea
+                        dropzoneClass={classes.dropzone}
+                        onChange={this.handleFileChange}
+                    />
 
                     <Button
                         type="submit"

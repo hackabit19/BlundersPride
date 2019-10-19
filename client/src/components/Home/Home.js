@@ -58,7 +58,7 @@ class Home extends Component {
 
         return (
             <Container maxWidth="lg" className={classes.container}>
-                <h1>Missing People</h1>
+                <h1>Missing</h1>
                 <List>{missingPersons}</List>
             </Container>
         );

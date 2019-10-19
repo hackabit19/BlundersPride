@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Container, withStyles, Paper, Avatar } from "@material-ui/core";
+import { Container, withStyles, Paper } from "@material-ui/core";
 
 import { style } from "./style";
 import Axios from "axios";
@@ -21,7 +21,7 @@ class SinglePerson extends Component {
             console.log(person);
             personData = (
                 <Paper className={classes.paper}>
-                    <Avatar
+                    <img
                         alt={person.imageName}
                         src={"/" + person.imageData}
                         className={classes.bigAvatar}
