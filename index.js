@@ -5,6 +5,8 @@ const bodyParser = require("body-parser");
 const passport = require("passport");
 const path = require("path");
 
+const User = require("./models/User");
+
 // Route Imports
 const users = require("./routes/api/users");
 
@@ -35,6 +37,24 @@ require("./config/passport")(passport);
 
 // Use Routes
 app.use("/api/users", users);
+
+// var ably = new require("ably").Realtime("0BeZCQ.p_xJxQ:kVy3m7kzD63IqtwN");
+// var channel = ably.channels.get("ablyTest");
+// app.post("/ablyTest", (req, res) => {
+//     const email = req.body.email;
+//     User.findOne({ email })
+//         .then(user => {
+//             channel.publish("greeting", user);
+//             return res.json({ msg: "success" });
+//         })
+//         .catch(err => console.log(err));
+
+//     // Publish a message to the test channel
+// });
+
+// channel.subscribe("greeting", message => {
+//     console.log(message.data);
+// });
 
 // Serve static assets.
 if (process.env.NODE_ENV === "production") {

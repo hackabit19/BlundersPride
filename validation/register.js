@@ -5,8 +5,6 @@ const userTypes = require("../static/userTypes").userTypes;
 const cityList = require("../static/cityList").cityList;
 const stateList = require("../static/stateList").stateList;
 
-console.log(userTypes);
-
 const validateRegisterInput = data => {
     let errors = {};
 
