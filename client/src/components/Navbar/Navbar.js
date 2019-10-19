@@ -47,21 +47,48 @@ class Navbar extends Component {
                 </Link>
             </Aux>
         );
+        let authorityOptions = null;
+
+        if (this.props.user.userType === "police") {
+            authorityOptions = (
+                <Aux>
+                    <Link
+                        to="/reportMissing"
+                        style={{ color: "inherit", textDecoration: "none" }}
+                    >
+                        <NavButton disableFocusRipple color="inherit">
+                            Report Missing
+                        </NavButton>
+                    </Link>
+                </Aux>
+            );
+        }
         if (this.props.isAuth) {
             authOptions = (
-                <Link
-                    to="/"
-                    style={{ color: "inherit", textDecoration: "none" }}
-                >
-                    <RegisterButton
-                        disableFocusRipple
-                        className={classes.registerButton}
-                        variant="outlined"
-                        onClick={this.onLogoutClick}
+                <Aux>
+                    {authorityOptions}
+                    <Link
+                        to="/home"
+                        style={{ color: "inherit", textDecoration: "none" }}
                     >
-                        Logout
-                    </RegisterButton>
-                </Link>
+                        <NavButton disableFocusRipple color="inherit">
+                            Home
+                        </NavButton>
+                    </Link>
+                    <Link
+                        to="/"
+                        style={{ color: "inherit", textDecoration: "none" }}
+                    >
+                        <RegisterButton
+                            disableFocusRipple
+                            className={classes.registerButton}
+                            variant="outlined"
+                            onClick={this.onLogoutClick}
+                        >
+                            Logout
+                        </RegisterButton>
+                    </Link>
+                </Aux>
             );
         }
         return (

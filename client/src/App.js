@@ -14,6 +14,9 @@ import Navbar from "./components/Navbar/Navbar";
 import Login from "./components/Login/Login";
 import Register from "./components/Register/Register";
 import Aux from "./hoc/Aux";
+import Home from "./components/Home/Home";
+import ReportMissing from "./components/ReportMissing/ReportMissing";
+import SinglePerson from "./components/SinglePerson/SinglePerson";
 
 const style = {
     container: {
@@ -58,13 +61,33 @@ class App extends Component {
             </Aux>
         );
         if (isAuthenticated) {
-            authRoutes = null;
+            authRoutes = (
+                <Aux>
+                    <Route exact path="/home" component={Home} />
+                    <Route exact path="/single/:id" component={SinglePerson} />
+                </Aux>
+            );
+        }
+        let authorityRoutes = null;
+        if (userData.userType === "police") {
+            authorityRoutes = (
+                <Aux>
+                    <Route
+                        exact
+                        path="/reportMissing"
+                        component={ReportMissing}
+                    />
+                </Aux>
+            );
         }
         return (
             <Router>
                 <Box>
-                    <Navbar isAuth={isAuthenticated} />
-                    <Box className={classes.container}>{authRoutes}</Box>
+                    <Navbar isAuth={isAuthenticated} user={userData} />
+                    <Box className={classes.container}>
+                        {authRoutes}
+                        {authorityRoutes}
+                    </Box>
                 </Box>
             </Router>
         );

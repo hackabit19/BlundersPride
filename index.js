@@ -4,19 +4,18 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const passport = require("passport");
 const path = require("path");
-
-const User = require("./models/User");
+const multer = require("multer");
 
 // Route Imports
 const users = require("./routes/api/users");
-
+const missingPersons = require("./routes/api/missingPersons");
 // Initialisation
 const app = express();
 const PORT = process.env.PORT || 12345;
 
 // Body Parser MiddleWare
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
+app.use(bodyParser.json({ limit: "50mb" }));
 
 // Connecting to database
 const dbURI = require("./config/keys").mongoURI;
@@ -29,6 +28,9 @@ mongoose
 
 mongoose.set("useFindAndModify", false);
 
+// Multer Middleware
+app.use("/uploads", express.static("uploads"));
+
 // Passport Middleware
 app.use(passport.initialize());
 
@@ -37,6 +39,7 @@ require("./config/passport")(passport);
 
 // Use Routes
 app.use("/api/users", users);
+app.use("/api/missingPersons", missingPersons);
 
 // var ably = new require("ably").Realtime("0BeZCQ.p_xJxQ:kVy3m7kzD63IqtwN");
 // var channel = ably.channels.get("ablyTest");
