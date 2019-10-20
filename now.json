@@ -3,29 +3,13 @@
     "builds": [{ "src": "index.js", "use": "@now/node-server" }],
     "routes": [
         {
-            "src": "/api/users/register",
-            "dest": "/index.js",
-            "methods": ["POST"]
-        },
-        {
-            "src": "/api/users/login",
-            "dest": "/index.js",
-            "methods": ["POST"]
-        },
-        {
-            "src": "/api/missingPersons/reportMissing",
-            "dest": "/index.js",
-            "methods": ["POST"]
-        },
-        {
-            "src": "/api/missingPersons/all",
-            "dest": "/index.js",
-            "methods": ["GET"]
-        },
-        {
-            "src": "/api/missingPersons/:id",
-            "dest": "/index.js",
-            "methods": ["GET"]
+            "headers": {
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+                "Access-Control-Allow-Headers": "X-Requested-With, Content-Type, Accept"
+            },
+            "src": "/.*",
+            "dest": "/index.js"
         }
     ]
 }
