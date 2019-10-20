@@ -63,7 +63,11 @@ class App extends Component {
         if (isAuthenticated) {
             authRoutes = (
                 <Aux>
-                    <Route exact path="/home" component={Home} />
+                    <Route
+                        exact
+                        path="/home"
+                        render={() => <Home user={userData} />}
+                    />
                     <Route exact path="/single/:id" component={SinglePerson} />
                 </Aux>
             );

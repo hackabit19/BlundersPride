@@ -44,10 +44,10 @@ app.use("/api/missingPersons", missingPersons);
 // Serve static assets.
 // if (process.env.NODE_ENV === "production") {
 // set a static folder.
-app.use(express.static(path.resolve(__dirname, "client", "build")));
+app.use(express.static(path.resolve(__dirname, "public")));
 
 app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+    res.sendFile(path.resolve(__dirname, "public", "index.html"));
 });
 // }
 

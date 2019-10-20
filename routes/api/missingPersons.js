@@ -49,7 +49,7 @@ router.post("/reportMissing", upload.single("imageData"), (req, res) => {
     newMissingPerson
         .save()
         .then(missingPerson => {
-            channel.publish("add", missingPerson);
+            channel.publish(missingPerson.city, missingPerson);
             return res.status(200).json(missingPerson);
         })
         .catch(err => console.log(err));

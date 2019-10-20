@@ -103,7 +103,8 @@ router.post("/login", (req, res) => {
                             id: user._id,
                             email: user.email,
                             name: user.name,
-                            userType: user.userType
+                            userType: user.userType,
+                            city: user.city
                         };
 
                         // Sign Token

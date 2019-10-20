@@ -4,6 +4,7 @@
     "description": "",
     "main": "index.js",
     "scripts": {
+        "build": "node -v",
         "start": "node server",
         "server": "nodemon server",
         "client-install": "yarn install --prefix client",

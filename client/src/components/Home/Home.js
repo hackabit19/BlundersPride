@@ -1,5 +1,12 @@
 import React, { Component } from "react";
-import { Container, withStyles, Paper, Avatar, List } from "@material-ui/core";
+import {
+    Container,
+    withStyles,
+    Paper,
+    Avatar,
+    List,
+    Checkbox
+} from "@material-ui/core";
 
 import { style } from "./style";
 import Axios from "axios";
@@ -7,7 +14,8 @@ import * as Ably from "ably";
 
 class Home extends Component {
     state = {
-        persons: []
+        persons: [],
+        getNotifications: true
     };
     componentDidMount() {
         Axios.get("/api/missingPersons/all")
@@ -18,13 +26,18 @@ class Home extends Component {
         channel.attach();
         channel.once("attached", () => {});
         channel.subscribe(message => {
-            this.setState(prev => {
-                let newPersons = prev.persons;
-                newPersons.push(message.data);
-                return {
-                    persons: newPersons.reverse()
-                };
-            });
+            if (
+                this.state.getNotifications &&
+                this.props.user.city === message.name
+            ) {
+                this.setState(prev => {
+                    let newPersons = prev.persons;
+                    newPersons.push(message.data);
+                    return {
+                        persons: newPersons.reverse()
+                    };
+                });
+            }
         });
     }
     render() {
@@ -59,6 +72,15 @@ class Home extends Component {
         return (
             <Container maxWidth="lg" className={classes.container}>
                 <h1>Missing</h1>
+                <Checkbox
+                    checked={this.state.getNotifications}
+                    label="Get Notifications"
+                    onChange={() =>
+                        this.setState({
+                            getNotifications: !this.state.getNotifications
+                        })
+                    }
+                ></Checkbox>
                 <List>{missingPersons}</List>
             </Container>
         );
